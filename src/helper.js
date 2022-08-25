@@ -1,13 +1,10 @@
-
-const API_URL = `https://itunes.apple.com/search?term=`
-
-const fetchSearch = async (searchTerm) => {
-    const response = await fetch(API_URL + searchTerm)
-    const resData = await response.json()
-    return resData.results
+const fetchSearch = (searchTerm) => {
+    return fetch(`https://itunes.apple.com/search?term=${searchTerm}`)
+    .then(response => response.json())
+    .then(resData => resData.results)
 }
 
-const wrapPromise = async (promise) => {
+const wrapPromise = (promise) => {
     let status = 'pending'
     let result = ''
     let suspender = promise.then(response => {
@@ -34,4 +31,3 @@ export const createResource = (searchTerm) => {
         result: wrapPromise(fetchSearch(searchTerm))
     }
 }
-

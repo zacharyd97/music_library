@@ -1,15 +1,15 @@
 {
   "name": "music_library",
-  "version": "0.1.0",
+  "vversion": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^0.0.0-experimental-c8b778b7f-20220825",
-    "react-dom": "^0.0.0-experimental-c8b778b7f-20220825",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "react": "^0.0.0-experimental-1a3f1afbd",
+    "react-dom": "^0.0.0-experimental-1a3f1afbd",
     "react-scripts": "4.0.3",
-    "web-vitals": "1.1.1"
+    "web-vitals": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

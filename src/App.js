@@ -1,50 +1,45 @@
-import { useEffect, useState, Suspense } from 'react'
+import './App.css';
+import { useState, Suspense, useEffect } from 'react'
 import Gallery from './components/Gallery'
 import SearchBar from './components/SearchBar'
+import Spinner from './components/Spinner'
 import { createResource as fetchData } from './helper'
 
-
-
-
 function App() {
-	let [searchTerm, setSearch] = useState('')
-	let [data, setData] = useState(null)
-	let [message, setMessage] = useState('Search for Music!')
-  
-	const renderGallery = () => {
-		if(data){
-			return (
-				<Suspense fallback={<h1>Loading...</h1>} >
-					<Gallery data={data}/></Suspense>
-				
-			)
-		}
-	}
-	const API_URL = 'https://itunes.apple.com/search?term='
+  let [searchTerm, setSearchTerm] = useState('')
+  let [message, setMessage] = useState('Search for Music!')
+  let [data, setData] = useState(null)
 
-	useEffect(() => {
-		if (searchTerm) {
-			setData(fetchData(searchTerm))
-		}
-	}, [searchTerm])
-	
-	
-	  
+  useEffect(() => {
+    if (searchTerm) {
+      document.title=`${searchTerm} Music`
+      console.log(fetchData(searchTerm))
+      setData(fetchData(searchTerm))
+  }
+  }, [searchTerm])
 
-	
-	const handleSearch = (e, term) => {
-		e.preventDefault()
-		setSearch(term)
-	}
+  const handleSearch = (e, term) => {
+    e.preventDefault()
+    setSearchTerm(term)
+  }
 
-	return (
-		<div className="App">
-			<SearchBar handleSearch={handleSearch} />
-			{message}
-			{renderGallery()}
-		</div>
-	)
-	
+  const renderGallery = () => {
+    if(data){
+      return (
+        <Suspense fallback={<Spinner />}>
+          <Gallery data={data} />
+        </Suspense>
+      )
+    }
+  }
+
+  return (
+    <div className="App">
+      <SearchBar handleSearch={handleSearch} />
+      {message}
+      {renderGallery()}
+    </div>
+  );
 }
 
 export default App;
